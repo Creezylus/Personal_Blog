@@ -1,0 +1,24 @@
+<!-- INCLUDE HEADER -->
+<%- include("./partials/header.ejs")  %>
+
+<div class = "main_container container-fluid">
+    <h1 class = "mb-2" >Compose</h1>
+
+    <form class="mt-5" action="/compose" method = "POST">
+        <!-- TITLE -->
+        <label class = "lblTitleIp fw-bold fs-6" for = "compose">Title</label>
+        <input class = "txtBoxTitleIp" id = "textTitleBox" name ="compose" type="text"/>
+        
+        <!-- POST -->
+        <label class = "lblAreaIp fw-bold fs-6" for = "post">Post</label>
+        <textarea class ="txtAreaIp" name = "post" rows="10" required></textarea>
+        
+        <!-- BUTTON -->
+        <button class = "btn btn-primary" type="submit" name="button" href = "/">Publish</button>
+    </form>
+</div>
+<!-- INCLUDE SCRIPTS-->
+<%- include("./partials/script.ejs")  %>
+
+<!-- INCLUDE FOOTER-->
+<%- include("./partials/footer.ejs")  %>

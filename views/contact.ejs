@@ -1,0 +1,11 @@
+<!-- INCLUDE HEADER -->
+<%- include("./partials/header.ejs")  %>
+
+<div class = "main_container container-fluid">
+    <% if (locals.contactPara) { %>
+        <h1 class = "mb-3">HelloContact</h1>
+        <p class = mt-2> <%= contactPara %>
+    <% } %>
+</div>
+<!-- INCLUDE FOOTER -->
+<%- include("./partials/footer.ejs")  %>

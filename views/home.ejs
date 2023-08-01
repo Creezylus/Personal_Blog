@@ -1,0 +1,28 @@
+<!-- INCLUDE HEADER-->
+<%- include("./partials/header.ejs")  %>
+
+<!-- MAIN HOME -->
+<div class = "main_container container-fluid">
+    <% if (locals.homePara) { %>
+        <h1 class = "mb-3">Hellozz</h1>
+        <p class = "mt-2"> <%= homePara %>
+    <% } %>
+</div>
+
+<!-- POSTS -->
+<div class = "main_container container-fluid">
+    <% if (locals.postTitleBody) { %>
+        <% postTitleBody = JSON.parse(postTitleBody); %>
+        <% console.log(postTitleBody.length); %>
+
+        <% postTitleBody.forEach(post => { %>
+            <h2 class = "mb-1"> <%= post.title %> </h2>
+            <p  class = "mt-0"> <%= post.body  %> </p>
+        <% }); %>
+    <% } %>
+</div>
+
+<!-- INCLUDE SCRIPTS-->
+<%- include("./partials/script.ejs")  %>
+<!-- INCLUDE FOOTER-->
+<%- include("./partials/footer.ejs")  %>
