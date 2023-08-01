@@ -3,29 +3,33 @@
 
     $(document).ready(function (){
     
-        /* Select all elements with class */
+        /* SELECT ALL ELEMENTS WITH CLASS */
         $('.nav-link').mouseenter(function () {
-            // Code to be executed when the mouse pointer enters the element (mouseover)
+            /* DEFINE EVENT BEHAVIOR (MOUSEOVER) */
             $(this).removeClass('text-secondary');
             $(this).addClass('nav_hover');
         });
         $('.nav-link').mouseleave(function () {
-            // Code to be executed when the mouse pointer leaves the element (mouseout)
+            /* DEFINE EVENT BEHAVIOR (MOUSEOUT) */ 
             $(this).removeClass('nav_hover');
             $(this).addClass('text-secondary');
         });
+
+        /* SELECT ALL ELEMENTS WITH ID */
         $('#textTitleBox').on('input',function () {
             if($(this).val().trim() !== '')
             {
+                /* DEFINE EVENT BEHAVIOR (INPUT TEXT) */
                 $(this).addClass('bg-yellow');
                 $(this).removeClass('bg-white');
             }
             else
             {
+                /* DEFINE EVENT BEHAVIOR (NO INPUT TEXT) */
                 $(this).addClass('bg-white');
                 $(this).removeClass('bg-yellow');
             }
         });
-
+        
     });
 </script>
