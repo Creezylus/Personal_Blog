@@ -30,6 +30,18 @@
                 $(this).removeClass('bg-yellow');
             }
         });
-        
+
+        /* TRUNCATE STRINGS FOR BODY */
+        $('.truncate').each(function(){
+            let fullString  = $(this).text();
+            let truncString = truncateString(fullString , 100)
+            $(this).text(truncString);
+        });
+
+        /* TRUNCATE STRINGS FOR GIVEN LEN */
+        function truncateString(string, maxLen)
+        { 
+            return (string.slice(0,maxLen) + "...");
+        } 
     });
 </script>

@@ -12,7 +12,7 @@
         <% postTitleBody = JSON.parse(postTitleBody); %>
         <% postTitleBody.forEach(post => { %>
             <h1 class = "mb-1"> <%= post.title %> </h2>
-            <p  class = "mt-0"> <%= post.body  %> </p>
+            <p  class = "truncate mt-0"> <%= post.body  %> </p>
         <% }); %>
     <% } %>
 </div>

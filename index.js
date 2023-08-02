@@ -10,7 +10,7 @@ var postTitleBodyArr = new Array();
 function objTitleBody(title, body) {
     this.title = title;
     this.body = body;
-  }
+}
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -50,20 +50,20 @@ app.get("/about",(req, res)=> {
         "about.ejs",
         {aboutPara: aboutString}
     );
-} );
+});
 
 app.get("/contact",(req, res)=> {
     res.render(
         "contact.ejs",
         {contactPara: aboutString}
     );
-} );
+});
 
 app.get("/compose",(req, res)=> {
     res.render(
         "compose.ejs",
     );
-} );
+});
 
 app.post("/compose",(req, res) => {
     const reqBody = req.body;
@@ -77,9 +77,11 @@ app.post("/compose",(req, res) => {
 });
 
 app.get("/posts/:name", (req, res) =>{
-    const titleContentIdx = loDash.findIndex(postTitleBodyArr,['title', req.params.name]);
+    const titleContentIdx = indexAt(postTitleBodyArr, req.params.name.toString());
+    console.log("TItleCOntextIDx " + titleContentIdx);
     if(titleContentIdx >= 0)
     {
+        console.log("Match");
         res.render(
             "post.ejs",
             {
@@ -93,47 +95,6 @@ app.get("/posts/:name", (req, res) =>{
     }
     
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.get("/", (req,res) => {
     try
@@ -149,26 +110,47 @@ app.get("/", (req,res) => {
         console.log(error);
     }
 });
-// app.post("/search", async (req,res) => {
 
-//     try
-//     {
-//         const asset  = req.body.searchCrypto.toLowerCase();
-//         const url= ("https://api.coincap.io/v2/assets/" + asset);
-//         const result = await axios.get(url);
-//         res.render('index.ejs', 
-//         {
-//             Options : coinsArr,
-//         });
-//     }
-//     catch
-//     {
-//         console.log(error);
-//     }
-
-// });
 app.listen(port, ()=>
     {
         console.log(" I am active on port: 3000");
     }
 );
+
+function checkCaseCapInsesitive(string1, string2) 
+{
+    string1 = string1.toLowerCase();
+    string2 = string2.toLowerCase();
+
+    console.log("str 1" + string1);
+    console.log("str 2" + string2);
+
+    string1 = string1.replace(/ /g, "-");
+    string2 = string2.replace(/ /g, "-");
+    console.log("str 1_ " + string1);
+    console.log("str 2_ " + string2);
+
+    if(string1 == string2)
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+function indexAt(arr, reqString)
+{
+    reqString = reqString.toString();
+    let idx = 0;
+    let retIdx = -1;
+    arr.forEach(element => {
+        let checkRes = checkCaseCapInsesitive(element.title.toString(), reqString);
+        console.log("resCheck= " + checkRes);
+        if(checkRes == true)
+        {
+            retIdx = idx;
+        }
+        idx++;
+    });
+    return retIdx;
+}
