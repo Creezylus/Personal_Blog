@@ -1,0 +1,20 @@
+<!-- INCLUDE HEADER-->
+<%- include("./partials/header.ejs")  %>
+<body>
+    <!-- MAIN HOME -->
+    <div class = "main_container container-fluid">
+    <!-- POSTS -->
+        <% if (locals.postTitleBody) { %>
+            <% postTitleBody = JSON.parse(postTitleBody); %>
+            <% postTitleBody.forEach(post => { %>
+                <h1 class = "mb-1"> <%= post.title %> </h2>
+                <p  class = "mt-0"> <%= post.body  %> </p>
+            <% }); %>
+        <% } %>
+    </div>
+
+    <!-- INCLUDE SCRIPTS-->
+    <%- include("./partials/script.ejs")  %>
+    <!-- INCLUDE FOOTER-->
+    <%- include("./partials/footer.ejs")  %>
+</body>
