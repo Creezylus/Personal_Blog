@@ -14,7 +14,9 @@
             <h1 class = "mb-1"> <%= post.title %> </h2>
         <div class = "d-flex flex-row">
             <p  class = "truncate mt-0"> <%= post.body  %> </p>
-            <p class = "readMoreLink"> <a href= "<%= urlBase %>/posts/<%= post.title %>">Read More </a></p>
+            <p> 
+                <a href= "<%= urlBase %>/posts/<%= post.title %>" class = "readMoreLink no-underline"> Read More </a>
+            </p>
         </div>
         <% }); %>
     <% } %>

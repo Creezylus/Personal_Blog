@@ -43,5 +43,17 @@
         { 
             return (string.slice(0,maxLen) + "...");
         } 
+
+        /* SELECT ALL ELEMENTS WITH CLASS */
+        $('.readMoreLink').mouseenter(function () {
+        /* DEFINE EVENT BEHAVIOR (MOUSEOVER) */
+        $(this).removeClass('no-underline');
+        $(this).addClass('underline');
+        });
+        $('.readMoreLink').mouseleave(function () {
+            /* DEFINE EVENT BEHAVIOR (MOUSEOUT) */ 
+            $(this).removeClass('underline');
+            $(this).addClass('no-underline');
+        });
     });
 </script>
