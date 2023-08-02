@@ -1,7 +1,7 @@
 import express from 'express';
 //import axios, { all } from 'axios';
 import bodyParser from 'body-parser';
-
+import loDash from 'lodash'
 const app  = express();
 const port = 3000;
 
@@ -28,53 +28,63 @@ const contactPara=
 " Est labore nulla et necessitatibus iste et delectus facere aut odit omnis cum rerum animi! Aut accusantium placeat aut dicta voluptatum quo quas tempora aut consequatur necessitatibus cum nobis autem est facilis molestiae aut galisum quod."
 + "Eum vero necessitatibus sit quasi voluptas est laudantium molestiae sit modi enim sed vero eius et rerum possimus est quis iusto. Aut odio error est ipsa inventore ut labore ipsum At omnis enim eum nesciunt cupiditate. Et voluptatem laudantium quo voluptatum omnis vel natus impedit aut voluptas quod et beatae velit."
 
-app.get("/",(req,res)=> {
-    console.log()
+app.get("/",(req, res)=> {
     res.render(
         "home.ejs",
         {
             homePara: homeStartingString,
-            postTitleBody:  JSON.stringify(postTitleBodyArr),
+            postTitleBody: JSON.stringify(postTitleBodyArr),
         }
     );
 });
 
-app.get("/about",(req,res)=> {
+app.get("/about",(req, res)=> {
     res.render(
         "home.ejs",
         {homePara: aboutString}
     );
 });
 
-app.get("/about",(req,res)=> {
+app.get("/about",(req, res)=> {
     res.render(
         "about.ejs",
         {aboutPara: aboutString}
     );
 } );
 
-app.get("/contact",(req,res)=> {
+app.get("/contact",(req, res)=> {
     res.render(
         "contact.ejs",
         {contactPara: aboutString}
     );
 } );
 
-app.get("/compose",(req,res)=> {
+app.get("/compose",(req, res)=> {
     res.render(
         "compose.ejs",
     );
 } );
-app.post("/compose",(req,res) => {
+app.post("/compose",(req, res) => {
     const reqBody = req.body;
     const ipText  = reqBody.compose;
     const ipArea  = reqBody.post;
 
-    const ipTitleBody = new objTitleBody(ipText,ipArea);
+    const ipTitleBody = new objTitleBody(ipText, ipArea);
     const arrayIdx = postTitleBodyArr.length;
     postTitleBodyArr[arrayIdx] = ipTitleBody;
-    console.log(postTitleBodyArr);
+    res.redirect("/");
+});
 
+app.get("/posts/:name", (req, res) =>{
+    var lod = loDash.findIndex(postTitleBodyArr,['title', req.params.name]);
+    if(lod >= 0)
+    {
+        console.log("match");
+    }
+    else
+    {
+        console.log("no match");
+    }
     res.redirect("/");
 });
 

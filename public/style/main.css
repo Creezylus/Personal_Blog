@@ -19,11 +19,11 @@
    padding-right: 5rem !important;
    margin-top: 7.5%;
    text-align: justify;
+   min-height: 90vh;
 }
 .custom_footer_container
 {
    
-    position:absolute;
     margin-bottom: 0px;
     padding-left: 0%;
     padding-right: 0%;
@@ -33,7 +33,7 @@
 .custom_footer
 {
     background-color: var(--bgnd);
-    margin-bottom: 0px !important;
+    margin-bottom: 0px !important;  
     padding-left: 5rem;
     width: 100%;
 }
