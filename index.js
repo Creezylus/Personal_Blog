@@ -12,6 +12,8 @@ function objTitleBody(title, body) {
     this.body = body;
 }
 
+
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -29,11 +31,14 @@ const contactPara=
 + "Eum vero necessitatibus sit quasi voluptas est laudantium molestiae sit modi enim sed vero eius et rerum possimus est quis iusto. Aut odio error est ipsa inventore ut labore ipsum At omnis enim eum nesciunt cupiditate. Et voluptatem laudantium quo voluptatum omnis vel natus impedit aut voluptas quod et beatae velit."
 
 app.get("/",(req, res)=> {
+    const baseUrl = req.protocol + '://' + req.get('host');
     res.render(
+        
         "home.ejs",
         {
             homePara: homeStartingString,
             postTitleBody: JSON.stringify(postTitleBodyArr),
+            urlBase: baseUrl,
         }
     );
 });
@@ -78,14 +83,14 @@ app.post("/compose",(req, res) => {
 
 app.get("/posts/:name", (req, res) =>{
     const titleContentIdx = indexAt(postTitleBodyArr, req.params.name.toString());
-    console.log("TItleCOntextIDx " + titleContentIdx);
+    const baseUrl = req.protocol + '://' + req.get('host');
     if(titleContentIdx >= 0)
     {
-        console.log("Match");
         res.render(
             "post.ejs",
             {
                 postTitleBody: JSON.stringify(postTitleBodyArr[titleContentIdx]),
+                urlBase: baseUrl,
             }
         );
     }
@@ -93,7 +98,6 @@ app.get("/posts/:name", (req, res) =>{
     {
         res.redirect("/");
     }
-    
 });
 
 app.get("/", (req,res) => {
@@ -122,13 +126,8 @@ function checkCaseCapInsesitive(string1, string2)
     string1 = string1.toLowerCase();
     string2 = string2.toLowerCase();
 
-    console.log("str 1" + string1);
-    console.log("str 2" + string2);
-
     string1 = string1.replace(/ /g, "-");
     string2 = string2.replace(/ /g, "-");
-    console.log("str 1_ " + string1);
-    console.log("str 2_ " + string2);
 
     if(string1 == string2)
     {
@@ -143,14 +142,15 @@ function indexAt(arr, reqString)
     reqString = reqString.toString();
     let idx = 0;
     let retIdx = -1;
+
     arr.forEach(element => {
         let checkRes = checkCaseCapInsesitive(element.title.toString(), reqString);
-        console.log("resCheck= " + checkRes);
         if(checkRes == true)
         {
             retIdx = idx;
         }
         idx++;
     });
+    
     return retIdx;
 }
