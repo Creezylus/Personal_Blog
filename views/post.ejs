@@ -6,10 +6,8 @@
     <!-- POSTS -->
         <% if (locals.postTitleBody) { %>
             <% postTitleBody = JSON.parse(postTitleBody); %>
-            <% postTitleBody.forEach(post => { %>
-                <h1 class = "mb-1"> <%= post.title %> </h2>
-                <p  class = "mt-0"> <%= post.body  %> </p>
-            <% }); %>
+            <h1 class = "mb-1"> <%= postTitleBody.title %> </h2>
+            <p  class = "mt-0"> <%= postTitleBody.body  %> </p>
         <% } %>
     </div>
 

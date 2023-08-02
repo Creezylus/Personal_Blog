@@ -64,6 +64,7 @@ app.get("/compose",(req, res)=> {
         "compose.ejs",
     );
 } );
+
 app.post("/compose",(req, res) => {
     const reqBody = req.body;
     const ipText  = reqBody.compose;
@@ -76,16 +77,21 @@ app.post("/compose",(req, res) => {
 });
 
 app.get("/posts/:name", (req, res) =>{
-    var lod = loDash.findIndex(postTitleBodyArr,['title', req.params.name]);
-    if(lod >= 0)
+    const titleContentIdx = loDash.findIndex(postTitleBodyArr,['title', req.params.name]);
+    if(titleContentIdx >= 0)
     {
-        console.log("match");
+        res.render(
+            "post.ejs",
+            {
+                postTitleBody: JSON.stringify(postTitleBodyArr[titleContentIdx]),
+            }
+        );
     }
     else
     {
-        console.log("no match");
+        res.redirect("/");
     }
-    res.redirect("/");
+    
 });
 
 
