@@ -35,7 +35,8 @@
         $('.truncate').each(function(){
             let fullString  = $(this).text();
             let truncString = truncateString(fullString , 150);
-            $(this).text(truncString);
+            $(this).html(truncString + '<a class = "readMoreLink no-underline" href="<% urlBase %>/posts/<% post.title %>" >Read More</a>');
+            
         });
 
         /* TRUNCATE STRINGS FOR GIVEN LEN */
@@ -55,5 +56,10 @@
             $(this).removeClass('underline');
             $(this).addClass('no-underline');
         });
+
+        function readMoreClick(baseUrl, postTitle) {
+            var newUrl = baseUrl + "/" + postTitle;
+            window.location.href = newUrl;
+        }
     });
 </script>
