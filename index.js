@@ -114,6 +114,24 @@ app.get("/posts/:name", (req, res) =>{
         res.redirect("/");
     }
 });
+app.get("/postsId/:id", (req, res) =>{
+    const titleContentIdx = req.params.id;
+    const baseUrl = req.protocol + '://' + req.get('host');
+    if(titleContentIdx >= 0)
+    {
+        res.render(
+            "post.ejs",
+            {
+                postTitleBody: JSON.stringify(allPostsResp.allPosts[titleContentIdx]),
+                urlBase: baseUrl,
+            }
+        );
+    }
+    else
+    {
+        res.redirect("/");
+    }
+});
 function checkCaseCapInsesitive(string1, string2) 
 {
     string1 = string1.toLowerCase();

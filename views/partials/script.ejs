@@ -1,8 +1,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    
+
 
     $(document).ready(function (){
-    
+        
         /* SELECT ALL ELEMENTS WITH CLASS */
         $('.nav-link').mouseenter(function () {
             /* DEFINE EVENT BEHAVIOR (MOUSEOVER) */
@@ -32,11 +34,12 @@
         });
 
         /* TRUNCATE STRINGS FOR BODY */
+        let id = 0;
         $('.truncate').each(function(){
             let fullString  = $(this).text();
             let truncString = truncateString(fullString , 150);
-            $(this).html(truncString + '<a class = "readMoreLink no-underline" href="<% urlBase %>/posts/<% post.title %>" >Read More</a>');
-            
+            $(this).html(`${truncString}<a class="readMoreLink no-underline" href="/postsId/${id}" onclick="readMoreClick()">Read More</a>`);
+            id = id + 1;
         });
 
         /* TRUNCATE STRINGS FOR GIVEN LEN */
@@ -56,10 +59,5 @@
             $(this).removeClass('underline');
             $(this).addClass('no-underline');
         });
-
-        function readMoreClick(baseUrl, postTitle) {
-            var newUrl = baseUrl + "/" + postTitle;
-            window.location.href = newUrl;
-        }
     });
 </script>
